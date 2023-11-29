@@ -15,17 +15,11 @@ def should_print(symbol):
   # Error loundly if so.
   assert visibility == 'STV_DEFAULT'
 
-  # TODO: should we return False for 'SHN_UNDEF'?
-  if index == 'SHN_ABS':
+  if index == 'SHN_ABS' or index == 'SHN_UNDEF':
     return False
 
   if symbol.name == '':
     return False
-
-  # if index == 'SHN_UNDEF':
-  #   print(symbol.entry.st_shndx, symbol.name, symbol.entry)
-  # if index == 
-  # assert isinstance(symbol.entry.st_shndx, int)
 
   return bind == 'STB_GLOBAL' or bind == 'STB_WEAK'
 
