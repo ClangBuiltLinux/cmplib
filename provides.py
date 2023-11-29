@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
+import sys
 from argparse import ArgumentParser
 from elftools.elf.elffile import ELFFile
+from elftools.common.exceptions import ELFError
 
 def should_print(symbol):
   bind = symbol.entry.st_info.bind
@@ -24,15 +26,19 @@ def should_print(symbol):
   return bind == 'STB_GLOBAL' or bind == 'STB_WEAK'
 
 def get_symbols(input_file):
-  with open(input_file, 'rb') as f:
-    elf_file = ELFFile(f)
-    dynsym_sec = elf_file.get_section_by_name('.dynsym')
-    for symbol in dynsym_sec.iter_symbols():
-      if should_print(symbol):
-        # print(symbol.name, symbol.entry)
-        yield symbol.name
+    with open(input_file, 'rb') as f:
 
+      try:
+        elf_file = ELFFile(f)
+      except ELFError as e:
+        print("non elf file", file=sys.stderr)
+        sys.exit(1)
 
+      dynsym_sec = elf_file.get_section_by_name('.dynsym')
+      for symbol in dynsym_sec.iter_symbols():
+        if should_print(symbol):
+          # print(symbol.name, symbol.entry)
+          yield symbol.name
 
 if __name__ == "__main__":
   parser = ArgumentParser(description="dump external symbols with visible linkage")
