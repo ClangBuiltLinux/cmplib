@@ -1,0 +1,3 @@
+[submodule "ar"]
+	path = ar
+	url = https://github.com/vidstige/ar.git
