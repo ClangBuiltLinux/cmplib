@@ -50,8 +50,6 @@ def get_symbols(input_file):
         elf_files.append(ELFFile(f))
         elf_file = ELFFile(f)
       except ELFError as e:
-        print("non elf file", file=sys.stderr)
-
         f.seek(0)
         archive = Archive(f)
 
