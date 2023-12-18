@@ -32,7 +32,7 @@ def should_print(symbol):
   return bind == 'STB_GLOBAL' or bind == 'STB_WEAK'
 
 
-def foo(elf_file):
+def gen_symbols(elf_file):
   sym_sec = elf_file.get_section_by_name('.dynsym') or elf_file.get_section_by_name('.symtab')
   if sym_sec == None:
     print("no .dynsym or .symtab found", file=sys.stderr)
@@ -61,7 +61,7 @@ def get_symbols(input_file):
           except ELFError as e:
             continue
       for elf_file in elf_files:
-        yield from foo(elf_file)
+        yield from gen_symbols(elf_file)
 
 
 if __name__ == "__main__":
