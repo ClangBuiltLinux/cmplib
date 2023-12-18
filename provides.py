@@ -2,11 +2,11 @@
 
 import sys
 from argparse import ArgumentParser
+from pathlib import Path
 from elftools.elf.elffile import ELFFile
 from elftools.common.exceptions import ELFError
 
-import io
-sys.path.insert(0, './ar')
+sys.path.insert(0, str(Path(__file__).parent / 'ar'))
 from ar import Archive
 
 def should_print(symbol):
