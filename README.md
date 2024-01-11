@@ -1,4 +1,4 @@
-# cmplibc
+# cmplib
 
 Tooling to analyzing binaries to better understand what symbols are expected
 to be provided from what libary at runtime.
