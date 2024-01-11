@@ -3,6 +3,10 @@
 Tooling to analyzing binaries to better understand what symbols are expected
 to be provided from what libary at runtime.
 
+```
+$ git clone --recursive https://github.com/ClangBuiltLinux/cmplib.git
+```
+
 ## Checking what symbols are provided by a library
 
 `./provides libfoo.[a,so]`
