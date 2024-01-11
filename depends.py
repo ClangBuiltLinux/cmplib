@@ -13,13 +13,21 @@ def should_print(symbol):
 
   return True
 
+
 def get_undefined_symbols(input_file):
   with open(input_file, 'rb') as f:
     elf_file = ELFFile(f)
+
     dynsym_sec = elf_file.get_section_by_name('.dynsym')
-    for symbol in dynsym_sec.iter_symbols():
-      if should_print(symbol):
-        # print(symbol.name, symbol.entry)
+    if dynsym_sec != None:
+      for symbol in dynsym_sec.iter_symbols():
+        if should_print(symbol):
+          # print(symbol.name, symbol.entry)
+          yield symbol.name
+
+    symtab = elf_file.get_section_by_name('.symtab')
+    if symtab != None:
+      for symbol in symtab.iter_symbols():
         yield symbol.name
 
 if __name__ == "__main__":
