@@ -1,7 +1,7 @@
 # cmplib
 
 Tooling to analyzing binaries to better understand what symbols are expected
-to be provided from what libary at runtime.
+to be provided from what library at runtime.
 
 ```
 $ git clone --recursive https://github.com/ClangBuiltLinux/cmplib.git
